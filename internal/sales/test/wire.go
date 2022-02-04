@@ -20,6 +20,7 @@ var salesSet = wire.NewSet(
 
 	sales.NewPromotionItemFactory,
 	sales.NewCheckoutService,
+	sales.NewPromotionItemBuy2Free1,
 )
 
 func BuildTestContainer() *TestContainer {

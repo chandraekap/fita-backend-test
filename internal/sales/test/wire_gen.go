@@ -22,10 +22,11 @@ func BuildTestContainer() *TestContainer {
 	promotionRepository := mock.NewPromotionRepository(v2)
 	promotionItemFactory := sales.NewPromotionItemFactory()
 	checkoutService := sales.NewCheckoutService(cartRepository, promotionRepository, promotionItemFactory)
-	testContainer := NewTestContainer(checkoutService)
+	promotionItemBuy2Free1 := sales.NewPromotionItemBuy2Free1()
+	testContainer := NewTestContainer(checkoutService, promotionItemBuy2Free1)
 	return testContainer
 }
 
 // wire.go:
 
-var salesSet = wire.NewSet(mock.InitData, wire.FieldsOf(new(*mock.Data), "Carts", "Promos"), mock.NewCartRepository, wire.Bind(new(sales.CartRepository), new(*mock.CartRepository)), mock.NewPromotionRepository, wire.Bind(new(sales.PromotionRepository), new(*mock.PromotionRepository)), sales.NewPromotionItemFactory, sales.NewCheckoutService)
+var salesSet = wire.NewSet(mock.InitData, wire.FieldsOf(new(*mock.Data), "Carts", "Promos"), mock.NewCartRepository, wire.Bind(new(sales.CartRepository), new(*mock.CartRepository)), mock.NewPromotionRepository, wire.Bind(new(sales.PromotionRepository), new(*mock.PromotionRepository)), sales.NewPromotionItemFactory, sales.NewCheckoutService, sales.NewPromotionItemBuy2Free1)
