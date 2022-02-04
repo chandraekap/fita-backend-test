@@ -7,7 +7,7 @@ const RASPBERRY_PI_PROMO_SKU string = "234234"
 type PromotionItemFreeRaspberry struct {
 }
 
-func NewPromotionItemFreeRaspberry() PromotionItemService {
+func NewPromotionItemFreeRaspberry() *PromotionItemFreeRaspberry {
 	return &PromotionItemFreeRaspberry{}
 }
 

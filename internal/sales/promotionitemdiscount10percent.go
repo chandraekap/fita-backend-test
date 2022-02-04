@@ -9,7 +9,7 @@ import (
 type PromotionItemDiscount10Percent struct {
 }
 
-func NewPromotionItemDiscount10Percent() PromotionItemService {
+func NewPromotionItemDiscount10Percent() *PromotionItemDiscount10Percent {
 	return &PromotionItemDiscount10Percent{}
 }
 

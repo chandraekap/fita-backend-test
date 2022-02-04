@@ -8,7 +8,7 @@ import (
 type PromotionItemBuy2Free1 struct {
 }
 
-func NewPromotionItemBuy2Free1() PromotionItemService {
+func NewPromotionItemBuy2Free1() *PromotionItemBuy2Free1 {
 	return &PromotionItemBuy2Free1{}
 }
 
