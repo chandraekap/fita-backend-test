@@ -52,6 +52,24 @@ func InitData() *Data {
 					},
 				},
 			},
+			{
+				ID:       4,
+				ClientID: 99998,
+				Items: []*sales.CartItem{
+					{
+						SKU:   "43N23P",
+						Name:  "MacBook Pro",
+						Price: 5399.99,
+						Qty:   1,
+					},
+					{
+						SKU:   "234234",
+						Name:  "Raspberry Pi B",
+						Price: 30.00,
+						Qty:   3,
+					},
+				},
+			},
 		},
 		Promos: []*sales.Promotion{
 			{

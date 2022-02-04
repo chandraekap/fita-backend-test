@@ -36,6 +36,33 @@ func TestCheckout(t *testing.T) {
 			},
 			err: nil,
 		},
+		"negative case macbook with promo in buying": {
+			clientID: 99998,
+			expected: &sales.CheckoutSummary{
+				Items: []*sales.CartItem{
+					{
+						SKU:   "43N23P",
+						Name:  "MacBook Pro",
+						Price: 5399.99,
+						Qty:   1,
+					},
+					{
+						SKU:   "234234",
+						Name:  "Raspberry Pi B",
+						Price: 30.00,
+						Qty:   2,
+					},
+					{
+						SKU:   "234234",
+						Name:  "Raspberry Pi B",
+						Price: 0,
+						Qty:   1,
+					},
+				},
+				TotalAmount: 5459.99,
+			},
+			err: nil,
+		},
 		"success case google home": {
 			clientID: 88888,
 			expected: &sales.CheckoutSummary{

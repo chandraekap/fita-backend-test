@@ -91,7 +91,21 @@ func (service *checkoutService) Checkout(ctx context.Context, clientID int) (*Ch
 
 	for _, checkoutItem := range checkoutItems {
 		if promoItem, ok := availablePromoBySKU[checkoutItem.SKU]; ok {
-			checkoutItem.Price = promoItem.Price
+
+			diffPromoQty := checkoutItem.Qty - promoItem.Qty
+
+			if diffPromoQty > 0 {
+				checkoutItem.Qty = diffPromoQty
+				checkoutItems = append(checkoutItems, &CartItem{
+					SKU:   checkoutItem.SKU,
+					Name:  checkoutItem.Name,
+					Qty:   promoItem.Qty,
+					Price: promoItem.Price,
+				})
+			} else {
+				checkoutItem.Price = promoItem.Price
+			}
+
 		}
 		totalAmount += (checkoutItem.Price * float64(checkoutItem.Qty))
 	}
