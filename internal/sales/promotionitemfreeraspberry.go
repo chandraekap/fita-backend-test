@@ -15,6 +15,6 @@ func (service *PromotionItemFreeRaspberry) Get(ctx context.Context, item *CartIt
 	return &PromoItem{
 		SKU:   RASPBERRY_PI_PROMO_SKU,
 		Price: 0,
-		Qty:   1,
+		Qty:   item.Qty,
 	}, nil
 }
