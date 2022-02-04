@@ -2,8 +2,6 @@ package sales
 
 import (
 	"context"
-
-	apperrors "github.com/chandraekap/fita-backend-test/internal/errors"
 )
 
 type PromotionItemDiscount10Percent struct {
@@ -15,7 +13,7 @@ func NewPromotionItemDiscount10Percent() *PromotionItemDiscount10Percent {
 
 func (service *PromotionItemDiscount10Percent) Get(ctx context.Context, item *CartItem) (*PromoItem, error) {
 	if item.Qty < 3 {
-		return nil, apperrors.NewNotFoundError("Promotion Item")
+		return nil, ErrPromotionItemNotFound
 	}
 
 	discount := item.Price * 0.1

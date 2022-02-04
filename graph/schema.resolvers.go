@@ -6,7 +6,6 @@ package graph
 import (
 	"context"
 	"errors"
-	"log"
 
 	"github.com/chandraekap/fita-backend-test/graph/generated"
 	"github.com/chandraekap/fita-backend-test/graph/model"
@@ -24,8 +23,8 @@ func (r *mutationResolver) AddCart(ctx context.Context, input model.CartAddReque
 	}
 
 	activeCart, err := r.cartRepository.FindByClientID(ctx, input.ClientID)
-	if err != nil {
-		log.Println(err)
+	if err != nil && err != sales.ErrCartNotFound {
+		return nil, err
 	}
 	if activeCart == nil {
 		activeCart = &sales.Cart{
@@ -77,8 +76,8 @@ func (r *mutationResolver) AddCart(ctx context.Context, input model.CartAddReque
 
 func (r *mutationResolver) Checkout(ctx context.Context, input model.CheckoutRequest) (*model.CheckoutSummary, error) {
 	activeCart, err := r.cartRepository.FindByClientID(ctx, input.ClientID)
-	if err != nil {
-		log.Println(err)
+	if err != nil && err != sales.ErrCartNotFound {
+		return nil, err
 	}
 
 	if activeCart != nil {

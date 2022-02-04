@@ -1,6 +1,8 @@
 package sales
 
-import "context"
+import (
+	"context"
+)
 
 type PromoItem struct {
 	SKU   string

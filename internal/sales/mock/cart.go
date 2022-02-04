@@ -26,7 +26,7 @@ func (repo *CartRepository) FindByClientID(ctx context.Context, clientID int) (*
 		}
 	}
 
-	return nil, errors.New("Cart not found.")
+	return nil, sales.ErrCartNotFound
 }
 
 func (repo *CartRepository) Insert(ctx context.Context, cart *sales.Cart) error {

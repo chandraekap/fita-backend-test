@@ -2,8 +2,6 @@ package sales
 
 import (
 	"context"
-
-	apperrors "github.com/chandraekap/fita-backend-test/internal/errors"
 )
 
 type CheckoutSummary struct {
@@ -50,8 +48,7 @@ func (service *checkoutService) Checkout(ctx context.Context, clientID int) (*Ch
 		if promo != nil {
 			promotionItemService := service.promotionItemFactory.GetService(ctx, promo.RuleType)
 			promoItem, err := promotionItemService.Get(ctx, cartItem)
-			_, ok := err.(*apperrors.NotFoundError)
-			if err != nil && !ok {
+			if err != nil && err != ErrPromotionItemNotFound {
 				return nil, err
 			}
 

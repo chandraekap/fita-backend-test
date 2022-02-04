@@ -43,6 +43,16 @@ func TestPromotionItemDiscount10Percent(t *testing.T) {
 			},
 			err: nil,
 		},
+		"negative case qty less than 3": {
+			cartItem: &sales.CartItem{
+				SKU:   "A304SD",
+				Name:  "Alexa Speaker",
+				Price: 109.50,
+				Qty:   1,
+			},
+			expected: nil,
+			err:      sales.ErrPromotionItemNotFound,
+		},
 	}
 
 	container := salestest.BuildTestContainer()

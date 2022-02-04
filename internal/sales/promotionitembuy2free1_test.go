@@ -57,6 +57,16 @@ func TestPromotionBuy2Free1(t *testing.T) {
 			},
 			err: nil,
 		},
+		"negative case qty less than 3": {
+			cartItem: &sales.CartItem{
+				SKU:   "120P90",
+				Name:  "Google Home",
+				Price: 49.99,
+				Qty:   1,
+			},
+			expected: nil,
+			err:      sales.ErrPromotionItemNotFound,
+		},
 	}
 
 	container := salestest.BuildTestContainer()
