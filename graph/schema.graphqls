@@ -3,6 +3,13 @@
 # https://gqlgen.com/getting-started/
 
 
+type Item {
+	sku:          String!
+	name:         String!
+	price:        Float!
+	inventoryQty: Int!
+}
+
 type CartItem {
   sku:           String!
 	name:          String!
@@ -15,6 +22,11 @@ type Cart {
 	clientID: Int!
 	items:    [CartItem!]!
 }
+
+type Query {
+	items: [Item!]!
+}
+
 
 type CheckoutSummary {
 	items:          [CartItem!]!

@@ -30,3 +30,10 @@ type CheckoutSummary struct {
 	DiscountAmount float64     `json:"discountAmount"`
 	TotalAmount    float64     `json:"totalAmount"`
 }
+
+type Item struct {
+	Sku          string  `json:"sku"`
+	Name         string  `json:"name"`
+	Price        float64 `json:"price"`
+	InventoryQty int     `json:"inventoryQty"`
+}

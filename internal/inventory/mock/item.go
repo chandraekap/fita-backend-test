@@ -19,6 +19,10 @@ func NewItemRepository(
 	}
 }
 
+func (repo *ItemRepository) FindAll(ctx context.Context) ([]*inventory.Item, error) {
+	return repo.data, nil
+}
+
 func (repo *ItemRepository) FindBySKU(ctx context.Context, sku string) (*inventory.Item, error) {
 	for _, itemData := range repo.data {
 		if itemData.SKU == sku {
