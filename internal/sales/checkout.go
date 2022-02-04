@@ -110,6 +110,11 @@ func (service *checkoutService) Checkout(ctx context.Context, clientID int) (*Ch
 		totalAmount += (checkoutItem.Price * float64(checkoutItem.Qty))
 	}
 
+	err = service.cartRepository.Delete(ctx, cart)
+	if err != nil {
+		return nil, err
+	}
+
 	return &CheckoutSummary{
 		Items:       checkoutItems,
 		TotalAmount: totalAmount,

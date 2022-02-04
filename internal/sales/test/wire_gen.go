@@ -25,7 +25,7 @@ func BuildTestContainer() *TestContainer {
 	promotionItemBuy2Free1 := sales.NewPromotionItemBuy2Free1()
 	promotionItemDiscount10Percent := sales.NewPromotionItemDiscount10Percent()
 	promotionItemFreeRaspberry := sales.NewPromotionItemFreeRaspberry()
-	testContainer := NewTestContainer(checkoutService, promotionItemBuy2Free1, promotionItemDiscount10Percent, promotionItemFreeRaspberry)
+	testContainer := NewTestContainer(checkoutService, promotionItemBuy2Free1, promotionItemDiscount10Percent, promotionItemFreeRaspberry, cartRepository)
 	return testContainer
 }
 

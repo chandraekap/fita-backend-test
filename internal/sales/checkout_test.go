@@ -104,7 +104,8 @@ func TestCheckout(t *testing.T) {
 	container := salestest.BuildTestContainer()
 
 	for caseName, tc := range testCases {
-		actual, err := container.CheckoutService.Checkout(context.TODO(), tc.clientID)
+		ctx := context.TODO()
+		actual, err := container.CheckoutService.Checkout(ctx, tc.clientID)
 		if err != tc.err {
 			t.Fatalf("got %v, want %v", err, tc.err)
 		}
@@ -116,6 +117,11 @@ func TestCheckout(t *testing.T) {
 		diff := cmp.Equal(tc.expected, actual)
 		if !diff {
 			t.Fatalf("got %+v, want %+v", actual, tc.expected)
+		}
+
+		activeCart, _ := container.CartRepository.FindByClientID(ctx, tc.clientID)
+		if activeCart != nil {
+			t.Fatal("Cart still active, expect deleted")
 		}
 	}
 }
