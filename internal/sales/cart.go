@@ -11,11 +11,10 @@ type Cart struct {
 }
 
 type CartItem struct {
-	SKU           string
-	Name          string
-	Qty           int
-	Price         float64
-	TotalDiscount float64
+	SKU   string
+	Name  string
+	Qty   int
+	Price float64
 }
 
 type CartRepository interface {
