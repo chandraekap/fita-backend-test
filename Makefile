@@ -9,3 +9,10 @@ run:
 
 test:
 	go test -cover ./...
+
+wire:
+	wire gen
+	wire gen ./internal/sales/test
+
+gql:
+	go run github.com/99designs/gqlgen generate
