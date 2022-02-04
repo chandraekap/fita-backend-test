@@ -15,11 +15,10 @@ type CartAddRequest struct {
 }
 
 type CartItem struct {
-	Sku           string  `json:"sku"`
-	Name          string  `json:"name"`
-	Qty           int     `json:"qty"`
-	Price         float64 `json:"price"`
-	TotalDiscount float64 `json:"totalDiscount"`
+	Sku   string  `json:"sku"`
+	Name  string  `json:"name"`
+	Qty   int     `json:"qty"`
+	Price float64 `json:"price"`
 }
 
 type CheckoutRequest struct {

@@ -59,11 +59,10 @@ func (r *mutationResolver) AddCart(ctx context.Context, input model.CartAddReque
 	cartItemsView := []*model.CartItem{}
 	for _, cartItem := range activeCart.Items {
 		cartItemsView = append(cartItemsView, &model.CartItem{
-			Sku:           cartItem.SKU,
-			Name:          cartItem.Name,
-			Qty:           cartItem.Qty,
-			Price:         cartItem.Price,
-			TotalDiscount: cartItem.TotalDiscount,
+			Sku:   cartItem.SKU,
+			Name:  cartItem.Name,
+			Qty:   cartItem.Qty,
+			Price: cartItem.Price,
 		})
 	}
 
@@ -100,11 +99,10 @@ func (r *mutationResolver) Checkout(ctx context.Context, input model.CheckoutReq
 	items := []*model.CartItem{}
 	for _, item := range checkoutSummary.Items {
 		items = append(items, &model.CartItem{
-			Sku:           item.SKU,
-			Name:          item.Name,
-			Qty:           item.Qty,
-			Price:         item.Price,
-			TotalDiscount: item.TotalDiscount,
+			Sku:   item.SKU,
+			Name:  item.Name,
+			Qty:   item.Qty,
+			Price: item.Price,
 		})
 	}
 

@@ -48,11 +48,10 @@ type ComplexityRoot struct {
 	}
 
 	CartItem struct {
-		Name          func(childComplexity int) int
-		Price         func(childComplexity int) int
-		Qty           func(childComplexity int) int
-		Sku           func(childComplexity int) int
-		TotalDiscount func(childComplexity int) int
+		Name  func(childComplexity int) int
+		Price func(childComplexity int) int
+		Qty   func(childComplexity int) int
+		Sku   func(childComplexity int) int
 	}
 
 	CheckoutSummary struct {
@@ -138,13 +137,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CartItem.Sku(childComplexity), true
-
-	case "CartItem.totalDiscount":
-		if e.complexity.CartItem.TotalDiscount == nil {
-			break
-		}
-
-		return e.complexity.CartItem.TotalDiscount(childComplexity), true
 
 	case "CheckoutSummary.discountAmount":
 		if e.complexity.CheckoutSummary.DiscountAmount == nil {
@@ -265,7 +257,6 @@ type CartItem {
 	name:          String!
 	qty:           Int!
 	price:         Float!
-	totalDiscount: Float!
 }
 
 type Cart {
@@ -610,41 +601,6 @@ func (ec *executionContext) _CartItem_price(ctx context.Context, field graphql.C
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.Price, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(float64)
-	fc.Result = res
-	return ec.marshalNFloat2float64(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _CartItem_totalDiscount(ctx context.Context, field graphql.CollectedField, obj *model.CartItem) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:     "CartItem",
-		Field:      field,
-		Args:       nil,
-		IsMethod:   false,
-		IsResolver: false,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.TotalDiscount, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -2204,16 +2160,6 @@ func (ec *executionContext) _CartItem(ctx context.Context, sel ast.SelectionSet,
 		case "price":
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._CartItem_price(ctx, field, obj)
-			}
-
-			out.Values[i] = innerFunc(ctx)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "totalDiscount":
-			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
-				return ec._CartItem_totalDiscount(ctx, field, obj)
 			}
 
 			out.Values[i] = innerFunc(ctx)

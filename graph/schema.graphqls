@@ -8,7 +8,6 @@ type CartItem {
 	name:          String!
 	qty:           Int!
 	price:         Float!
-	totalDiscount: Float!
 }
 
 type Cart {
